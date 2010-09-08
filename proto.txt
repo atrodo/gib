@@ -1,0 +1,36 @@
+Client:
+[client name]
+
+
+>[directory name]<
+[dev]\t[inode]\t[mode]\t[nlink]\t[uid]\t[gid]\t[rdev]\t[size]\t[atime]\t[mtime]\t[ctime]\t[blksize]\t[blocks]\t[filename]\t[sha1/link/dir]
+(repeat)
+<[directory name]>
+^D
+
+Server:
+[sha1]
+(repeat)
+^D
+
+Client:
+[sha1]
+(zlib compressed stream)
+(repeat)
+[-{40}]
+0{1024}
+^D
+
+Server:
+[sha1]\t(Success|Actual Error)
+^D
+(Success|Actual Error)
+
+(repeat)
+
+(Closed)
+
+Any error for a sha1 will stop the backup.
+
+Links are the form "->[link]"
+Dirs are the form ">[dir]<"
